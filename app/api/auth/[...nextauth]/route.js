@@ -3,8 +3,7 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { signIn } from "next-auth/react";
 import mongoose from "mongoose";
-import User from "../../../models/User";
-import Payment from "../../../models/Payment";
+
 //import GoogleProvider from "next-auth/providers/google";
 // import EmailProvider from "next-auth/providers/email";
 
@@ -38,7 +37,10 @@ export const authOptions = ({
   async signIn({ user, account, profile, email, credentials }) {
    if(account.provider == "github"){
     //connect to a database
-    const client = await mongoose.connect()
+    const client = await mongoose.connect("mongodb://localhost:27017/chai", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     //check if the user already exists in the database
     const currentUser =await User.findOne({ email: email })
     if (!currentUser) {
@@ -54,6 +56,7 @@ export const authOptions = ({
     else {
       user.name = currentUser.username
     }
+    return true;
    }
   }
 }

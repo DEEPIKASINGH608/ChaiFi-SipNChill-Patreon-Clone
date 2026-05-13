@@ -27,8 +27,7 @@ const paymentSchema = new Schema({
     done: {
         type: Boolean,
         default: false,
-    },  
+    },
 });
 
-const Payment =  model("Payment", paymentSchema);
 export default mongoose.models.Payment || Payment;
