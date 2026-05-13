@@ -10,7 +10,7 @@ const Dashboard = () => {
 
     return (
         <div className='container mx-auto py-0 px-0'>
-            <h1 className='text-center my-3 text-2xl font-bold'>Welcome to your Dashboard</h1>
+            <h1 className='text-center my-3 text-2xl font-bold'>My Dashboard</h1>
 
             <div className='max-w-md mx-auto flex flex-col gap-3 bg-[#0f172a] p-6 rounded-xl border border-white/5'>
 
@@ -67,5 +67,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-
-
