@@ -81,3 +81,7 @@ Open http://localhost:3000 in your browser to interact with the application.
    Synchronization: The application checks the MongoDB database. If the user profile is unrecognized, a structured document is automatically provisioned using the User model.
 
    Session Hydration: The custom session() callback runs, querying MongoDB to fetch properties like the unique username and binding it directly onto session.user so it's accessible globally across the front end.
+
+
+
+   
