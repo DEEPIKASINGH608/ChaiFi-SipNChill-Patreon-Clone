@@ -44,7 +44,7 @@ const Navbar = () => {
                                             className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white"
                                             onClick={() => setIsOpen(false)}
                                         >
-                                            Dashboard
+                                           My Dashboard
                                         </Link>
 
                                         <Link
@@ -52,7 +52,7 @@ const Navbar = () => {
                                             className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white"
                                             onClick={() => setIsOpen(false)}
                                         >
-                                            Account settings
+                                            Account Settings
                                         </Link>
 
                                         <button
@@ -62,7 +62,7 @@ const Navbar = () => {
                                             }}
                                             className="block w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-white/5 hover:text-white"
                                         >
-                                            Sign out
+                                            Log out
                                         </button>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ const Navbar = () => {
                 ) : (
                     <Link href="/login">
                         <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-700 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-900 px-5 py-2.5 text-center text-xs font-bold rounded-lg transition-all">
-                            Login
+                            Register
                         </button>
                     </Link>
                 )}
@@ -91,5 +91,4 @@ const Navbar = () => {
 }
 
 export default Navbar;
-
 
