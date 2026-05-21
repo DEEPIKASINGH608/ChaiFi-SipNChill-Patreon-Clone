@@ -6,6 +6,7 @@ import Link from "next/link";
 const Navbar = () => {
     const { data: session } = useSession();
     const [isOpen, setIsOpen] = useState(false);
+    
 
     return (
         <nav className="bg-[#020617] h-16 border-b border-white/5 shadow-lg text-[#F8FAFC] flex items-center justify-between px-8 sticky top-0 z-50">
@@ -48,6 +49,14 @@ const Navbar = () => {
                                         </Link>
 
                                         <Link
+                                            href={`/${session.user.username || session.user.email.split('@')[0]}`}
+                                            className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                           Your Page
+                                        </Link>
+
+                                        <Link
                                             href="/account"
                                             className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white"
                                             onClick={() => setIsOpen(false)}
@@ -62,7 +71,7 @@ const Navbar = () => {
                                             }}
                                             className="block w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-white/5 hover:text-white"
                                         >
-                                            Log out
+                                            Sign out
                                         </button>
                                     </div>
                                 </div>
@@ -81,7 +90,7 @@ const Navbar = () => {
                 ) : (
                     <Link href="/login">
                         <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-700 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-900 px-5 py-2.5 text-center text-xs font-bold rounded-lg transition-all">
-                            Register
+                            Sign In
                         </button>
                     </Link>
                 )}

@@ -4,103 +4,120 @@ export default async function Username({ params }) {
   const { username } = await params;
 
   return (
-    <div className='bg-[#000d1a] min-h-screen text-white'>
+    <div className='w-full bg-[#030712] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-gray-950 to-black text-white pb-12 min-h-screen text-sm selection:bg-cyan-500 selection:text-black'>
+
       {/* Banner Section */}
-      <div className='cover w-full relative'>
+      <div className='cover w-full relative h-[380px] overflow-hidden group'>
+
+        {/* Animated Background Glow behind the banner */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse duration-[6000ms]"></div>
+
+        {/* Seamless Gradient Overlay blending directly into your page colors */}
+        <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-transparent via-70% to-[#030712] z-10 pointer-events-none'></div>
+
         <img
-          className='object-cover w-full h-[360px]'
+          className='object-cover w-full h-full transition-transform duration-1000 ease-out group-hover:scale-[1.03] filter brightness-[0.9] contrast-[1.1] saturate-[1.05]'
           src="/patreon_banner.gif"
           alt="Banner"
         />
-        <div className='absolute inset-0 bg-gradient-to-b from-transparent to-[#000d1a]'></div>
       </div>
 
       {/* Profile Section */}
       <div className='info flex flex-col items-center mt-[-60px] pb-32 relative z-10'>
-        <div className='relative'>
+
+        {/* Glowing Outer Ring around Profile Picture (Line Removed) */}
+        <div className='relative group'>
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-500 rounded-full blur-md opacity-75 group-hover:opacity-100 transition duration-500 shadow-[0_0_30px_rgba(147,51,234,0.3)]"></div>
           <img
-            className='rounded-full h-[100px] w-[100px] border-4 border-[#000d1a] object-cover bg-black shadow-xl'
+            className='relative rounded-full h-[110px] w-[110px] border-4 border-[#030712] object-cover bg-black shadow-2xl transition-transform duration-300 group-hover:scale-105'
             src="/cat.jpg"
             alt="Profile"
           />
         </div>
 
-        <div className='gap-1 mt-4 flex flex-col items-center text-center px-4'>
-          <div className='font-bold text-2xl tracking-tight'>
+        {/* User Info Typography */}
+        <div className='gap-1.5 mt-5 flex flex-col items-center text-center px-4'>
+          <h1 className='font-extrabold text-3xl tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent drop-shadow-sm'>
             @{username}
-          </div>
-          <div className='text-slate-400 text-sm max-w-lg'>
+          </h1>
+          <div className='text-slate-400 text-sm max-w-lg font-medium'>
             Creating Animated art for VTT's
           </div>
-          <div className='text-cyan-500 text-xs font-medium mt-1 uppercase tracking-widest'>
-            9,917 patrons • $29,000 per month
+
+          {/* Badge design for stats */}
+          <div className='bg-cyan-950/40 border border-cyan-500/20 text-cyan-400 text-[11px] font-bold mt-2 px-3 py-1 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(6,182,212,0.1)]'>
+            🚀 9,917 patrons • $29,000 per month
           </div>
         </div>
 
+        {/* Main Content Blocks */}
+        <div className="payment flex flex-col md:flex-row gap-6 w-1/2 lg:w-[60%] mt-12">
 
-
-        <div className="payment flex flex-col md:flex-row gap-6 w-1/2 lg:w-[60%] mt-10">
-
-          {/* Supporters Section*/}
-          <div className="supporters w-full md:w-1/2 bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl min-h-[300px]">
-            <h2 className='text-lg font-bold mb-6 border-b border-white/10 pb-3'>
-              Supporters
+          {/* Supporters Section */}
+          <div className="supporters w-full md:w-1/2 bg-slate-950/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl min-h-[300px] shadow-2xl">
+            <h2 className='text-lg font-bold mb-6 border-b border-white/5 pb-3 text-slate-200 flex items-center gap-2'>
+              <span className="text-purple-400">⚡</span> Supporters
             </h2>
 
             <ul className='text-slate-300 text-lg space-y-4'>
-              <li className="flex flex-col">
-                <div className="flex items-center gap-2"> {/*flex container for alignment */}
+              <li className="flex flex-col group/item">
+                <div className="flex items-center gap-2">
                   <img
                     src="avatar4.png"
                     alt=""
-                    className='rounded-full size-8 object-cover border border-white/20'
+                    className='rounded-full size-8 object-cover border border-white/10 transition-transform group-hover/item:scale-110'
                   />
                   <span className="font-bold text-cyan-400 text-base">Shubham</span>
                 </div>
-                <span className="text-slate-500 italic mt-1 text-sm pl-10"> Subham donated $20! with a message "Keep up the great work!"
+                <span className="text-slate-400 italic mt-1 text-sm pl-10">
+                  Subham donated <span className="text-emerald-400 font-semibold">$20!</span> with a message "Keep up the great work!"
                 </span>
               </li>
 
-              <li className="flex flex-col">
+              <li className="flex flex-col group/item">
                 <div className="flex items-center gap-2">
                   <img
                     src="avatar3.png"
                     alt=""
-                    className='rounded-full size-8 object-cover border border-white/20'
+                    className='rounded-full size-8 object-cover border border-white/10 transition-transform group-hover/item:scale-110'
                   />
                   <span className="font-bold text-cyan-400 text-base">Jane Smith</span>
                 </div>
-                <span className="text-slate-500 italic mt-1 text-sm pl-10"> Jane donated $50! with a message
-                  "Your art is amazing! Can't wait to see more!"
+                <span className="text-slate-400 italic mt-1 text-sm pl-10">
+                  Jane donated <span className="text-emerald-400 font-semibold">$50!</span> with a message "Your art is amazing! Can't wait to see more!"
                 </span>
               </li>
             </ul>
           </div>
 
           {/* Make Payment Section */}
-          <div className="makePayment w-1/2 bg-gradient-to-br from-[#1e2d44] to-[#121b28] border border-white/10 p-6 rounded-2xl min-h-[300px] shadow-2xl">
-            <h2 className="text-lg font-bold mb-4 tracking-tight">Make a Payment</h2>
+          <div className="makePayment w-1/2 bg-gradient-to-br from-slate-900/90 to-slate-950 border border-white/5 p-6 rounded-2xl min-h-[300px] shadow-2xl relative overflow-hidden">
+            {/* Ambient background light within the payment card */}
+            <div className="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
-            <div className="flex flex-col gap-2">
+            <h2 className="text-lg font-bold mb-4 tracking-tight text-slate-200 flex items-center gap-2">
+              <span className="text-cyan-400">☕</span> Make a Payment
+            </h2>
+
+            <div className="flex flex-col gap-3">
               <input
                 type="text"
                 placeholder="Name"
-                className="w-full p-3 text-sm rounded-lg bg-white/5 border border-white/10 focus:border-cyan-500 outline-none transition-all"
+                className="w-full p-3 text-sm rounded-xl bg-white/[0.03] border border-white/10 focus:border-cyan-500/50 focus:bg-white/[0.07] outline-none transition-all placeholder:text-slate-500"
               />
               <input
                 type="text"
                 placeholder="Message"
-                className="w-full p-3 text-sm rounded-lg bg-white/5 border border-white/10 focus:border-cyan-500 outline-none transition-all"
+                className="w-full p-3 text-sm rounded-xl bg-white/[0.03] border border-white/10 focus:border-cyan-500/50 focus:bg-white/[0.07] outline-none transition-all placeholder:text-slate-500"
               />
-
 
               <div className="flex gap-2 w-full">
                 <input
                   type="number"
                   placeholder="Amount"
-                  className="min-w-0 flex-1 p-3 text-sm rounded-lg bg-white/5 border border-white/10 focus:border-cyan-500 outline-none transition-all"
+                  className="min-w-0 flex-1 p-3 text-sm rounded-xl bg-white/[0.03] border border-white/10 focus:border-cyan-500/50 focus:bg-white/[0.07] outline-none transition-all placeholder:text-slate-500"
                 />
-                <button className="whitespace-nowrap bg-gradient-to-r from-purple-600 to-blue-600 hover:brightness-110 text-white text-sm font-bold py-2 px-6 rounded-lg transition-all shadow-lg active:scale-95">
+                <button className="whitespace-nowrap bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-sm font-bold py-2 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(147,51,234,0.3)] active:scale-95">
                   Pay
                 </button>
               </div>
@@ -108,7 +125,7 @@ export default async function Username({ params }) {
               {/* Quick Select Buttons */}
               <div className="flex flex-wrap gap-2 mt-1">
                 {['$10', '$20', '$30'].map((amt) => (
-                  <button key={amt} className="flex-1 min-w-[60px] p-2 text-xs rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                  <button key={amt} className="flex-1 min-w-[60px] p-2 text-xs font-semibold rounded-lg bg-white/[0.03] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:text-white hover:border-white/20 transition-all active:scale-95">
                     {amt}
                   </button>
                 ))}
@@ -116,14 +133,10 @@ export default async function Username({ params }) {
             </div>
           </div>
 
-
         </div>
       </div>
     </div>
   );
 }
-
-
-
 
 
