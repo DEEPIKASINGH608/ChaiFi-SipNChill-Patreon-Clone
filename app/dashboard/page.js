@@ -18,11 +18,31 @@ const Dashboard = () => {
     razorpaysecret: ""
   })
 
+  // 1. Protection and Redirection Hook
   useEffect(() => {
     if (status !== "loading" && !session) {
       router.push('/login')
     }
   }, [session, status, router])
+
+  // 2. Hydration and Console Logging Hook (To match Harry's screen!)
+  useEffect(() => {
+    if (session && session.user) {
+      // THIS IS THE EXACT LOG FROM THE VIDEO!
+      console.log(session.user)
+
+      // Automatically fill inputs with GitHub session values
+      setForm({
+        name: session.user.name || "",
+        email: session.user.email || "",
+        username: session.user.username || "",
+        profilepic: session.user.image || "",
+        coverpic: "", // Keep blank until they upload one
+        razorpayid: "",
+        razorpaysecret: ""
+      })
+    }
+  }, [session])
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -59,7 +79,7 @@ const Dashboard = () => {
               {field.label}
             </label>
             <input
-              value={form[field.name]}
+              value={form[field.name] || ""} // Fallback value to prevent undefined warning
               onChange={handleChange}
               name={field.name}
               type={field.type}
@@ -77,3 +97,5 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+

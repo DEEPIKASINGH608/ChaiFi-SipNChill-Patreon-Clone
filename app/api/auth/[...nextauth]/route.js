@@ -38,24 +38,32 @@ export const authOptions = {
   async signIn({ user, account, profile, email, credentials }) {
    if(account.provider == "github"){
     await connectDb();
+    //check if user already exists in the database
+    const userEmail = user.email;
     const currentUser =await User.findOne({ email: userEmail });
     if (!currentUser) {
+
       //if not, create a new user
       const newUser = new User({
         email: userEmail,
         username: userEmail.split("@")[0],
+        name: user.name || "",          // Fallback if name doesn't exist
+        profilePic: user.image || "",
       });
-      await newUser.save()
+      user.name = newUser.username; // Update the user object with the name from the database
+      const savedUser = await newUser.save();
+      await newUser.save();
+    } else {
+      user.name = currentUser.username; // Update the user object with the name from the database
     }
-    return true
+    return true;
    }
    return false;
   },
    async session({ session, user, token }) {
     const dbUser = await User.findOne({ email: session.user.email });
-    if (dbUser) {
+      console.log(dbUser);
       session.user.username = dbUser.username;
-    }
     return session;
   },
   }

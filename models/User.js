@@ -5,13 +5,15 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     name: {
         type: String,
-        required: true,
+
     },
     username: {
         type: String,
+        required: true,
         unique: true,
     },
     profilePic: {
@@ -27,10 +29,12 @@ const userSchema = new Schema({
     updatedAt: {
         type: Date,
         default: Date.now,
-    },
+    }
+}, {
+    timestamps: true
 });
 
 
 
-export default mongoose.models.User || mongoose.model("User", userSchema);
+export default mongoose.models.User || model("User", userSchema);
 
