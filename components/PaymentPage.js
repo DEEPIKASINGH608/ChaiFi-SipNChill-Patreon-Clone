@@ -16,7 +16,12 @@ const PaymentPage = ({ params }) => {
             "callback_url": `${process.env.URL}/api/razorpay`,
             "prefill": {
                 "name": "Ansh Singh",
-                "email": "ansh.singh@gmail.com"
+                "email": "ansh.singh@gmail.com",
+                "contact": "9999999999",
+                "method": "upi",
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                }
             }
         };
     };
