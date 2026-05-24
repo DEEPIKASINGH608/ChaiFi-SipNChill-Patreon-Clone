@@ -1,10 +1,13 @@
 "use client"
 import React from 'react'
 import Script from 'next/script'
+import { initiate } from '@/lib/api';
 
 const PaymentPage = ({ params }) => {
 
-    const pay = (amount, orderid) => {
+    const pay = async (amount, orderid) => {
+        //get thev order id
+        let a = await initiate(amount, session?.user.name, paymentform);
         var options = {
             "key": "process.env.KEY_ID",
             "amount": amount * 100,
@@ -17,13 +20,17 @@ const PaymentPage = ({ params }) => {
             "prefill": {
                 "name": "Ansh Singh",
                 "email": "ansh.singh@gmail.com",
-                "contact": "9999999999",
-                "method": "upi",
-                "notes": {
-                    "address": "Razorpay Corporate Office"
-                }
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
             }
         };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
     };
     return (
         <>
@@ -149,7 +156,7 @@ const PaymentPage = ({ params }) => {
 
                                 {/* Quick Select Buttons */}
                                 <div className="flex flex-wrap gap-2 mt-1">
-                                    {['$10', '$20', '$30'].map((amt) => (
+                                    {['₹10', '₹20', '₹30'].map((amt) => (
                                         <button key={amt} className="flex-1 min-w-[60px] p-2 text-xs font-semibold rounded-lg bg-white/[0.03] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:text-white hover:border-white/20 transition-all active:scale-95">
                                             {amt}
                                         </button>
