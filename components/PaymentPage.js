@@ -5,7 +5,7 @@ import { initiate } from '@/lib/api';
 import { useSession } from 'next-auth/react';
 
 const PaymentPage = ({ username = "" }) => {
-    // FIX 1: Initialize fields properly so your inputs can track data correctly
+
     const [paymentform, setPaymentForm] = useState({ name: '', message: '', amount: '' });
 
     const handleChange = (e) => {
@@ -22,12 +22,11 @@ const PaymentPage = ({ username = "" }) => {
             return;
         }
 
-        // get the order id
+
         let a = await initiate(amount, username, paymentform);
         let orderId = a.id;
 
         var options = {
-            // FIX 2: Removed string quotes to access real environment variables
             "key": process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
             "amount": amount * 100,
             "currency": "INR",
