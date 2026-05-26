@@ -1,34 +1,37 @@
 import { NextResponse } from "next/server";
-import { validatePayment } from "@/lib/razorpay";
-import Payment from "@/models/payment";
+import { validatePayment } from "../../../lib/razorpay";
+import Payment from "../../../models/Payment";
 import Razorpay from "razorpay";
-import connectDB from "@/utils/connectDB";
+import connectDB from "../../../utils/connectDB";
 
-export async function POST(request) {
+export async function POST(req) {
     await connectDB();
-    let body = await request.json();
-    body = object.fromEntries(body);
 
+    let body = await req.formData();
+    body = Object.fromEntries(body);
 
-    //check if razorpayid is present on the server
     let p = await Payment.findOne({ oid: body.razorpay_order_id });
     if (!p) {
-        return NextResponse.json({ error: "Payment not found" }, { status: 404 });
+        return NextResponse.json({ success: false, message: "Order ID not found in database" });
     }
 
-    //verify the payment
+    const isValid = validatePayment(
+        body.razorpay_order_id,
+        body.razorpay_payment_id,
+        body.razorpay_signature
+    );
 
-    let xx = validatePaymentverification({"razorpay_order_id": body.razorpay_order_id , "razorpay_payment_id": body.razorpay_payment_id, "razorpay_signature": body.razorpay_signature}, process.env.KEY_SECRET);
-
-    if (xx) {
+    if (isValid) {
         const updatedPayment = await Payment.findOneAndUpdate(
             { oid: body.razorpay_order_id },
             { done: true },
             { new: true }
         );
-        return NextResponse.redirect(`${process.env.CLIENT_URL}/${updatedPayment.to_user}?paymentdone=true`);
+
+        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/${updatedPayment.to_username}?paymentdone=true`);
+
     } else {
-        return NextResponse.error({ error: "Payment verification failed" }, { status: 400 });
+        return NextResponse.json({ success: false, message: "Payment Verification Failed" });
     }
 }
 

@@ -7,22 +7,18 @@ import User from "../models/User";
 
 export const initiate = async (amount, username, paymentformData) => {
     await connectDB()
-
-    // FIX: Initialize the missing 'instance' using your environment variables
-    const instance = new Razorpay({
-        key_id: process.env.RAZORPAY_KEY_ID,
+    var instance = new Razorpay({
+        key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
     let options = {
-        amount: Number.parseInt(amount) * 100, // Amount in paise
+        amount: Number.parseInt(amount) * 100,
         currency: "INR",
     }
 
-    // This will now successfully authenticate without throwing a 401
     let x = await instance.orders.create(options)
 
-    // Create a payment object which shows pending payment in the database
     await Payment.create({
         oid: x.id,
         amount: amount,

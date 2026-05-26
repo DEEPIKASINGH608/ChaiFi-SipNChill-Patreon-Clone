@@ -1,5 +1,4 @@
 import mongoose, { Schema, model } from "mongoose";
-const { Schema, model } = mongoose;
 
 const paymentSchema = new Schema({
     name: {
