@@ -6,8 +6,8 @@ import { useSession } from 'next-auth/react';
 
 const PaymentPage = ({ username = "" }) => {
 
-    const [paymentform, setPaymentForm] = useState({ name: '', message: '', amount: '' });
-
+    const [paymentform, setPaymentForm] = useState({ });
+    const [currentUser, setcurrentUser] = useState({ });
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPaymentForm((prev) => ({
@@ -15,6 +15,11 @@ const PaymentPage = ({ username = "" }) => {
             [name]: value
         }));
     };
+
+    const getData= async (params) => {
+        let u = await fetchuser(username)
+        setcurrentUser(u)
+    }
 
     const pay = async (amount) => {
         if (!amount || isNaN(amount) || Number(amount) <= 0) {
