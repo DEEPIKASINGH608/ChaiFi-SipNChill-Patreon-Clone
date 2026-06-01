@@ -32,7 +32,7 @@ export const initiate = async (amount, username, paymentformData) => {
         console.error("Error initiating payment:", error);
         throw new Error("Failed to initiate payment");
     }
-} // 👈 This closing brace was missing!
+}
 
 export const fetchuser = async (username) => {
     await connectDB()
@@ -53,3 +53,15 @@ export const fetchpayments = async (username) => {
     return JSON.parse(JSON.stringify(p))
 }
 
+export const updateProfile = async (data, oldusername) => {
+    await connectDB()
+    let ndata = Object.fromEntries(data)
+
+    if(oldusername !== ndata.username){
+    let u = await username.findOne({username: ndata.username})
+    if(u){
+        return {error: "Username already exists."}
+    }
+  }
+  await username.updateOne({email: ndata.email}, ndata)
+}

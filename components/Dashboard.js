@@ -1,16 +1,45 @@
 "use client"
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { useSession, signals, signOut } from "next-auth/react"
+import { useRouter } from 'next/navigation'
+import { fetchuser,  updateProfile } from '@/actions/useractions'
 const Dashboard = () => {
+    const { data: session, update } = useSession()
+    const router = useRouter()
     const [form, setForm] = useState({ name: "", email: "", username: "", profilepic: "", coverpic: "", razorpayid: "", razorpaysecret: "" })
+
+    useEffect{() => {
+        getData()
+        if (!session) {
+            router.push('/logic')
+        }
+    }, [router, session]}
+
+    const getData = async () => {
+        let u = await fetchuser(session.user.name)
+        setForm(u)
+    }
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
+    const handleSubmit = async(e) => {
+        update()
+        let a = await updateProfile(e, session.user.name)
+        alert("Profile updated")
+    }
+
+
+
     return (
         <div className='container mx-auto py-0 px-0'>
             <h1 className='text-center my-3 text-2xl font-bold'>My Dashboard</h1>
+
+            <form className='max-w-2xl mx-auto' onSubmit = {handleSubmit}>
+
+            </form>
+
 
             <div className='max-w-md mx-auto flex flex-col gap-3 bg-[#0f172a] p-6 rounded-xl border border-white/5'>
 
