@@ -200,7 +200,7 @@ const PaymentPage = ({ username = "" }) => {
                                             <span className="font-bold text-cyan-400 text-base">
                                                 {payment.name}
                                                 <span className="text-slate-400 font-normal text-sm"> donated </span>
-                                                <span className="text-emerald-400">₹{payment.amount}</span>
+                                                <span className="text-emerald-400">₹{Number(payment.amount) / 100}</span>
                                             </span>
                                         </div>
                                         <span className="text-slate-400 italic mt-1 text-sm pl-10">
