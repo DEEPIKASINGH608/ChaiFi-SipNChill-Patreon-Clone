@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useSession, signals, signOut } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 import { fetchuser, updateProfile } from '@/actions/useractions'
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSearchParams } from 'next/navigation';
+import { Bounce } from 'react-toastify';
 
 const Dashboard = () => {
     const { data: session, update } = useSession()
@@ -87,6 +91,18 @@ const Dashboard = () => {
 
     return (
         <>
+            <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+        />
             <div className='container mx-auto py-0 px-0'>
                 <h1 className='text-center my-3 text-2xl font-bold'>My Dashboard</h1>
                 <form className='max-w-2xl mx-auto' onSubmit={handleSubmit}>
