@@ -8,6 +8,10 @@ import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { Bounce } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 const PaymentPage = ({ username = "" }) => {
     const { data: session } = useSession();
@@ -168,12 +172,12 @@ const PaymentPage = ({ username = "" }) => {
                             @{username}
                         </h1>
                         <div className='text-slate-400 text-sm max-w-lg font-medium'>
-                            {currentUser.name ? `Supporting ${currentUser.name}` : "Creating Animated art for VTT's"}
+                            {currentUser.name ? `Supporting ${currentUser.name}` : `Lets help ${username} with their work!`}
                         </div>
 
                         {/* Badge design for stats */}
                         <div className='bg-cyan-950/40 border border-cyan-500/20 text-cyan-400 text-[11px] font-bold mt-2 px-3 py-1 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(6,182,212,0.1)]'>
-                            🚀 {payments.length} patrons • ₹{payments.reduce((a, b) => a + b.amount, 0)} raised
+                             {payments.length} Payments  • ₹{payments.reduce((a, b) => a + b.amount, 0)} raised
                         </div>
                     </div>
 

@@ -4,12 +4,16 @@ import Razorpay from "razorpay";
 import Payment from "../models/Payment";
 import connectDB from "@/db/connectDb";
 import User from "@/models/User";
+import Email from "next-auth/providers/email";
 
-export const initiate = async (amount, username, paymentformData) => {
+export const initiate = async (amount, to_username, paymentformData) => {
     await connectDB()
-    const instance = new Razorpay({
-        key_id: process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        key_secret: process.env.RAZORPAY_SECRET || process.env.RAZORPAY_KEY_SECRET,
+    let user = await User.findOne({ username: to_username });
+    const secret = user.razorpaysecret;
+
+    var instance = new Razorpay({
+        key_id: user.razorpayid,
+        key_secret: secret,
     });
 
     const amountInPaise = Number.parseInt(amount) * 100;
@@ -24,7 +28,7 @@ export const initiate = async (amount, username, paymentformData) => {
         await Payment.create({
             oid: x.id,
             amount: Number.parseInt(amount),
-            to_user: username,
+            to_user: to_username,
             name: paymentformData.name,
             message: paymentformData.message
         });
@@ -46,7 +50,7 @@ export const fetchuser = async (username) => {
 
 export const fetchpayments = async (username) => {
     await connectDB()
-    let p = await Payment.find({ to_user: username, done:true }).sort({ amount: -1 }).lean()
+    let p = await Payment.find({ to_user: username, done: true }).sort({ amount: -1 }).lean()
     return JSON.parse(JSON.stringify(p))
 }
 
@@ -60,8 +64,8 @@ export const updateProfile = async (oldusername, data) => {
             if (existingUser) {
                 return { success: false, message: "Username is already taken!" };
             }
+                await Payment.updateMany({ to_user: oldusername }, { $set: { to_user: data.username } });
         }
-
         const updatedUser = await User.findOneAndUpdate(
             { username: oldusername },
             { $set: data },
@@ -74,12 +78,16 @@ export const updateProfile = async (oldusername, data) => {
 
         return {
             success: true,
+            message: "Profile updated successfully!",
             user: JSON.parse(JSON.stringify(updatedUser))
         };
 
     } catch (error) {
         console.error("Database Update Error:", error);
-        throw new Error(error.message || "Failed to update profile due to an internal error.");
+        return {
+            success: false,
+            message: error.message || "Failed to update profile due to an internal server error."
+        };
     }
 }
 

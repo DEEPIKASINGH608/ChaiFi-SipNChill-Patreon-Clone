@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { fetchuser, updateProfile } from '@/actions/useractions'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSearchParams } from 'next/navigation';
 import { Bounce } from 'react-toastify';
 
 const Dashboard = () => {
@@ -56,6 +55,7 @@ const Dashboard = () => {
 
         try {
             await updateProfile(currentUsername, cleanFormData)
+
             await update({
                 name: cleanFormData.name,
                 username: cleanFormData.username,
@@ -66,22 +66,25 @@ const Dashboard = () => {
                 razorpaysecret: cleanFormData.razorpaysecret
             })
 
-            toast('Profile updated successfully!'), {
+            toast.success('Profile updated successfully!', {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-                progress: undefined,
                 theme: "dark",
                 transition: Bounce,
-            }
-            if (currentUsername === cleanFormData.username) {
-                router.push(`/${cleanFormData.username}`)
-            } else {
-                window.location.href = `${window.location.origin}/${cleanFormData.username}`
-            }
+            });
+
+            setTimeout(() => {
+                if (currentUsername === cleanFormData.username) {
+                    router.push(`/${cleanFormData.username}`)
+                } else {
+                    window.location.href = `${window.location.origin}/${cleanFormData.username}`
+                }
+            }, 2000);
+
         } catch (err) {
             console.error("Failed to update profile:", err)
             alert("Error updating profile: " + err.message)
@@ -92,17 +95,18 @@ const Dashboard = () => {
     return (
         <>
             <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-        />
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+
             <div className='container mx-auto py-0 px-0'>
                 <h1 className='text-center my-3 text-2xl font-bold'>My Dashboard</h1>
                 <form className='max-w-2xl mx-auto' onSubmit={handleSubmit}>

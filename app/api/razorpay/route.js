@@ -3,6 +3,7 @@ import { validatePayment } from "../../../lib/razorpay";
 import Payment from "../../../models/Payment";
 import Razorpay from "razorpay";
 import connectDB from "../../../db/connectDb";
+import User from "../../../models/User";
 
 export async function POST(req) {
     await connectDB();
@@ -15,10 +16,14 @@ export async function POST(req) {
         return NextResponse.json({ success: false, message: "Order ID not found in database" });
     }
 
+    let user = await User.findOne({ username: p.to_user });
+    const secret = user.razorpaysecret;
+
     const isValid = validatePayment(
         body.razorpay_order_id,
         body.razorpay_payment_id,
-        body.razorpay_signature
+        body.razorpay_signature,
+        secret
     );
 
     if (isValid) {
