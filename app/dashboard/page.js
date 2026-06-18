@@ -105,7 +105,7 @@ const Dashboard = () => {
 
   return (
     <div className='container mx-auto py-10 px-4 text-white min-h-screen'>
-      <h1 className='text-center mb-10 text-3xl font-bold'>Welcome to your Dashboard</h1>
+      <h1 className='text-center mb-10 text-3xl font-bold'>My Dashboard</h1>
 
       <form onSubmit={handleSubmit} className='flex flex-col gap-5 max-w-2xl mx-auto bg-slate-900/50 p-8 rounded-2xl border border-white/5 shadow-xl'>
 
@@ -141,4 +141,6 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+
 
