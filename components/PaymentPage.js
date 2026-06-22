@@ -83,7 +83,7 @@ const PaymentPage = ({ username = "" }) => {
 
             let orderId = a.id;
             if (!window.Razorpay) {
-                alert("Razorpay SDK failed to load. Please check your internet connection or reload the page.");
+                alert("Razorpay SDK failed to load. Check your internet connection or reload the page.");
                 return;
             }
 
@@ -102,7 +102,7 @@ const PaymentPage = ({ username = "" }) => {
                     "contact": "9999999999"
                 },
                 "notes": {
-                    "address": "Razorpay Corporate Office"
+                    "address": "Razorpay Corpo. Office"
                 },
                 "theme": {
                     "color": "#3399cc"
@@ -114,7 +114,7 @@ const PaymentPage = ({ username = "" }) => {
 
         } catch (error) {
             console.error("Payment processing failed:", error);
-            alert("Payment failed to initialize! Error: " + error.message);
+            alert("Payment failed to initialize! error: " + error.message);
         }
     };
 
@@ -162,7 +162,7 @@ const PaymentPage = ({ username = "" }) => {
                         />
                     </div>
 
-                    {/* User Info Typography */}
+                    {/* User Info Typogra. */}
                     <div className='gap-1.5 mt-5 flex flex-col items-center text-center px-4'>
                         <h1 className='font-extrabold text-3xl tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent drop-shadow-sm'>
                             @{username}
@@ -189,7 +189,7 @@ const PaymentPage = ({ username = "" }) => {
                             <ul className='text-slate-300 space-y-4 text-sm'>
                                 {payments.length === 0 && (
                                     <li className="text-slate-500 text-center mt-10 text-sm">
-                                        No supporters yet. Be the first!
+                                        No supporters yet.
                                     </li>
                                 )}
 

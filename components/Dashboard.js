@@ -46,7 +46,7 @@ const Dashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const currentUsername = session?.user?.username || session?.user?.name;
+        const currentUsername = session?.user?.username || session?.user?.name;   
         if (!currentUsername) {
             alert("Session error: User identity not found.")
             return;
