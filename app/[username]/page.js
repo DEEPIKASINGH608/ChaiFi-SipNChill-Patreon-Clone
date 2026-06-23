@@ -26,7 +26,7 @@ export default Username;
 export async function generateMetadata({ params })  {
     const { username } = await params;
     return {
-    title : `${username} - Chaify`,
+    title : `Support ${username} - Chaify`,
     }
 }
 

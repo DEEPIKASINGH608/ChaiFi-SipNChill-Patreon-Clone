@@ -33,7 +33,6 @@ const connectDb = async () => {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
-    console.error("❌ MongoDB Connection Error:", e);
     throw e;
   }
 

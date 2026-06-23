@@ -35,7 +35,6 @@ export const initiate = async (amount, to_username, paymentformData) => {
 
         return x
     } catch (error) {
-        console.error("Error initiating payment:", error);
         throw new Error("Failed to initiate payment");
     }
 }
@@ -83,8 +82,7 @@ export const updateProfile = async (oldusername, data) => {
         };
 
     } catch (error) {
-        console.error("Database Update Error:", error);
-        return {
+         return {
             success: false,
             message: error.message || "Failed to update profile due to an internal server error."
         };

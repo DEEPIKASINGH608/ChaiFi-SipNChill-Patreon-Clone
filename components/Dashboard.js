@@ -92,7 +92,6 @@ const Dashboard = () => {
             }, 2000);
 
         } catch (err) {
-            console.error("Failed to update profile:", err)
             alert("Error updating profile: " + err.message)
         }
     }

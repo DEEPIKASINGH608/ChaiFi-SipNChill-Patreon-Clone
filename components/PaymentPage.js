@@ -113,7 +113,6 @@ const PaymentPage = ({ username = "" }) => {
             rzp1.open();
 
         } catch (error) {
-            console.error("Payment processing failed:", error);
             alert("Payment failed to initialize! error: " + error.message);
         }
     };
@@ -183,7 +182,7 @@ const PaymentPage = ({ username = "" }) => {
                         {/* Supporters Section */}
                         <div className="supporters w-full md:w-1/2 bg-slate-950/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl min-h-[300px] shadow-2xl">
                             <h2 className='text-lg font-bold mb-6 border-b border-white/5 pb-3 text-slate-200 flex items-center gap-2'>
-                                <span className="text-purple-400">⚡</span> Supporters
+                                <span className="text-purple-400">⚡</span> Top 10 Supporters
                             </h2>
 
                             <ul className='text-slate-300 space-y-4 text-sm'>
