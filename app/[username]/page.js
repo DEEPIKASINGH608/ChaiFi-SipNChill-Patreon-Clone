@@ -6,15 +6,13 @@ import User from '@/models/User';
 
 
 const Username = async ({ params }) => {
-    const checkUser = async () => {
+    const { username } = await params;
+
     await connectDB();
-    let u = await User.findOne({ username: params.username });
+    let u = await User.findOne({ username: username });
     if (!u) {
         return notFound();
     }
-}
-await checkUser()
-
 
     return (
         <>
@@ -22,13 +20,13 @@ await checkUser()
         </>
     );
 };
-
 export default Username;
 
 
 export async function generateMetadata({ params })  {
+    const { username } = await params;
     return {
-    title : `${params.username} - Chaify`,
+    title : `${username} - Chaify`,
     }
 }
 

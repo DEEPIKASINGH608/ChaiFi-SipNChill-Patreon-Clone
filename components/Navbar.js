@@ -55,18 +55,12 @@ const Navbar = () => {
                                             className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white"
                                             onClick={() => setIsOpen(false)}
                                         >
-                                           Your Page
-                                        </Link>
-
-                                        <Link
-                                            href="/account"
-                                            className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            Account Settings
+                                           My Page
                                         </Link>
 
                                         
+
+
 
                                         <button
                                             onClick={() => {
@@ -104,3 +98,5 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+

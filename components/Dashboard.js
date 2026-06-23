@@ -1,11 +1,10 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { useSession, signals, signOut } from "next-auth/react"
+import React, { useEffect, useState, useCallback } from 'react'
+import { useSession, } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 import { fetchuser, updateProfile } from '@/actions/useractions'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Bounce } from 'react-toastify';
 
 const Dashboard = () => {
     const { data: session, update } = useSession()
@@ -21,23 +20,24 @@ const Dashboard = () => {
     })
 
 
-    useEffect(() => {
-        if (!session) {
-            router.push('/login')
-        } else {
-            getData()
-        }
-        console.log("Current Session Payload:", session)
-    }, [router, session]
-    )
-    const getData = async () => {
+    const getData = useCallback(async () => {
         const currentUsername = session?.user?.username || session?.user?.name;
         if (currentUsername) {
             let u = await fetchuser(currentUsername)
             setForm(u || {})
         }
+    }, [session]);
 
-    }
+
+    useEffect(() => {
+        if (session === null) {
+            router.push('/login')
+        } else if (session) {
+            getData()
+        }
+
+    }, [router, session, getData]
+    )
 
     const handleChange = async (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -46,7 +46,7 @@ const Dashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const currentUsername = session?.user?.username || session?.user?.name;   
+        const currentUsername = session?.user?.username || session?.user?.name;
         if (!currentUsername) {
             alert("Session error: User identity not found.")
             return;
@@ -54,18 +54,14 @@ const Dashboard = () => {
         const { _id, __v, createdAt, updatedAt, ...cleanFormData } = form;
 
         try {
-            await updateProfile(currentUsername, cleanFormData)
+            const res = await updateProfile(currentUsername, cleanFormData)
 
-            await update({
-                name: cleanFormData.name,
-                username: cleanFormData.username,
-                email: cleanFormData.email,
-                profilepic: cleanFormData.profilepic,
-                coverpic: cleanFormData.coverpic,
-                razorpayid: cleanFormData.razorpayid,
-                razorpaysecret: cleanFormData.razorpaysecret
-            })
+            if (res && res.success === false) {
+                toast.error(res.message || "Failed to update profile database.");
+                return;
+            }
 
+            // Fire toast first before changing the session state
             toast.success('Profile updated successfully!', {
                 position: "top-right",
                 autoClose: 3000,
@@ -76,6 +72,16 @@ const Dashboard = () => {
                 theme: "dark",
                 transition: Bounce,
             });
+
+            await update({
+                name: cleanFormData.name,
+                username: cleanFormData.username,
+                email: cleanFormData.email,
+                profilepic: cleanFormData.profilepic,
+                coverpic: cleanFormData.coverpic,
+                razorpayid: cleanFormData.razorpayid,
+                razorpaysecret: cleanFormData.razorpaysecret
+            })
 
             setTimeout(() => {
                 if (currentUsername === cleanFormData.username) {

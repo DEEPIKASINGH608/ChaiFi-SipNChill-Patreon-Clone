@@ -49,7 +49,7 @@ export default function Home() {
             </div>
             <h3 className="font-bold text-ghostWhite text-xl">Monthly Support</h3>
             <p className="text-center text-slate-400 leading-relaxed">
-              Turn your tea shop passion into a sustainable career with <span className="text-electric font-semibold">reliable monthly income</span> from your biggest fans.
+              Turn your passion into a sustainable career with reliable, direct crypto contributions from your biggest fans.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ export default function Home() {
             </div>
             <h3 className="font-bold text-ghostWhite text-xl">Ownership on Chain</h3>
             <p className="text-center text-slate-400 leading-relaxed">
-              Launch your <span className="text-electric font-semibold">decentralized shop</span> on Ethereum. No middlemen—just you, your tea, and your community.
+              Launch your <span className="text-electric font-semibold">decentralized profile.</span> No corporate gatekeepers—just you, your supporters, and smart contracts you control.
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export default function Home() {
             </div>
             <h3 className="font-bold text-ghostWhite text-xl">Direct Connection</h3>
             <p className="text-center text-slate-400 leading-relaxed">
-              Engage with a global community of <span className="text-electric font-semibold">tea enthusiasts</span> who value your craft and want to see you grow.
+              Engage with a global community of <span className="text-electric font-semibold">web enthusiasts</span> who value your craft and fund your growth directly on-chain.
             </p>
           </div>
         </div>
