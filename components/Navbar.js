@@ -10,7 +10,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="bg-[#020617] md:h-16 border-b border-white/5 shadow-lg text-[#F8FAFC] flex items-center justify-between px-8 sticky top-0 z-50 flex-col md:flex-row">
+        <nav className="bg-[#020617] md:h-16 border-b border-white/5 shadow-lg text-[#F8FAFC] flex items-center justify-between px-5 md:px-0 sticky top-0 z-50 flex-col md:flex-row text-xs md:text-base">
 
             <div className="logo font-bold text-lg flex items-center gap-2 cursor-pointer">
                 <img src="/chaig.gif" className="h-autto w-12 object-contain" alt="Logo" />
