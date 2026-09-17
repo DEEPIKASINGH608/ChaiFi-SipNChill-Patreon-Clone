@@ -46,7 +46,7 @@ ChaiFi/
 
 ⚙️ Installation & Setup
 1. Clone the Repository
-git clone https://github.com/your-username/ChaiFi.git
+git clone "link of this repo"
 cd ChaiFi
 
 2. Install Dependencies
